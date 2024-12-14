@@ -1,0 +1,49 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Estilos de encabezados */
+h1, h2 {
+    color: #2c3e50;
+    text-align: center;
+}
+
+/* Estilos de las secciones */
+section {
+    margin: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de listas */
+ul {
+    list-style-type: square;
+    margin-left: 40px;
+}
+
+/* Estilos para código y ejemplos */
+pre {
+    background-color: #e8f0fe;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    color: #2c3e50;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #2c3e50;
+    color: #ffffff;
+}

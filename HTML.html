@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apuntes de HTML</title>
+    <!-- Comentario: Agrega un favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+<!-- Introducción -->
+<section id="introduccion">
+    <header>
+        <h1>Introducción a HTML</h1>
+    </header>
+    <p>HTML (HyperText Markup Language) es un lenguaje de marcado utilizado para crear páginas web.</p>
+    <ul>
+        <li>Hipertexto: texto con referencias a otros textos.</li>
+        <li>Creado por Tim Berners-Lee en 1991.</li>
+        <li>Estándar desde 1995 con HTML 3.0.</li>
+    </ul>
+</section>
+
+<!-- Estructura básica -->
+<section id="estructura-basica">
+    <header>
+        <h2>Estructura Básica de un Documento HTML</h2>
+    </header>
+    <pre>
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Título</title>
+        </head>
+        <body>
+            <!-- Contenido aquí -->
+        </body>
+        </html>
+    </pre>
+</section>
+
+<!-- Elementos básicos -->
+<section id="elementos-basicos">
+    <header>
+        <h2>Elementos Básicos de HTML</h2>
+    </header>
+    <article>
+        <h3>Encabezados</h3>
+        <p>Ejemplo:</p>
+        <code>
+            <h1>Encabezado 1</h1>
+            <h2>Encabezado 2</h2>
+        </code>
+    </article>
+    <article>
+        <h3>Párrafos y Salto de Línea</h3>
+        <p>Ejemplo:</p>
+        <code>
+            <p>Este es un párrafo.</p>
+            <br>
+        </code>
+    </article>
+</section>
+
+<!-- Listas -->
+<section id="listas">
+    <header>
+        <h2>Listas</h2>
+    </header>
+    <article>
+        <h3>Lista Ordenada</h3>
+        <code>
+            <ol>
+                <li>Elemento 1</li>
+                <li>Elemento 2</li>
+            </ol>
+        </code>
+    </article>
+    <article>
+        <h3>Lista No Ordenada</h3>
+        <code>
+            <ul>
+                <li>Elemento 1</li>
+                <li>Elemento 2</li>
+            </ul>
+        </code>
+    </article>
+</section>
+
+<!-- Imágenes y Enlaces -->
+<section id="imagenes-enlaces">
+    <header>
+        <h2>Imágenes y Enlaces</h2>
+    </header>
+    <article>
+        <h3>Imágenes</h3>
+        <p>Ejemplo:</p>
+        <code>
+            <img src="imagen.jpg" alt="Descripción de la imagen" width="200" height="150">
+        </code>
+    </article>
+    <article>
+        <h3>Enlaces</h3>
+        <p>Ejemplo:</p>
+        <code>
+            <a href="https://www.google.com">Ir a Google</a>
+        </code>
+    </article>
+</section>
+
+<!-- Formularios -->
+<section id="formularios">
+    <header>
+        <h2>Formularios</h2>
+    </header>
+    <article>
+        <h3>Entrada de Texto</h3>
+        <code>
+            <form action="/submit" method="post">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre">
+            </form>
+        </code>
+    </article>
+    <article>
+        <h3>Método GET</h3>
+        <code>
+            <form action="/buscar" method="get">
+                <label for="query">Buscar:</label>
+                <input type="text" id="query" name="query">
+                <button type="submit">Buscar</button>
+            </form>
+        </code>
+    </article>
+    <article>
+        <h3>Botones</h3>
+        <code>
+            <button type="submit">Enviar</button>
+        </code>
+    </article>
+</section>
+
+<!-- Multimedios -->
+<section id="multimedios">
+    <header>
+        <h2>Elementos Multimedia</h2>
+    </header>
+    <article>
+        <h3>Audio</h3>
+        <code>
+            <audio controls>
+                <source src="audio.mp3" type="audio/mpeg">
+            </audio>
+        </code>
+    </article>
+    <article>
+        <h3>Video</h3>
+        <code>
+            <video controls width="300">
+                <source src="video.mp4" type="video/mp4">
+            </video>
+        </code>
+    </article>
+</section>
+
+<!-- Caracteres Especiales -->
+<section id="caracteres-especiales">
+    <header>
+        <h2>Caracteres Especiales</h2>
+    </header>
+    <p>Ejemplos de caracteres especiales:</p>
+    <ul>
+        <li>&lt; se escribe como &amp;lt;</li>
+        <li>&gt; se escribe como &amp;gt;</li>
+        <li>&amp; se escribe como &amp;amp;</li>
+    </ul>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>Apuntes de HTML basados en el material proporcionado.</p>
+</footer>
+</body>
+</html>
