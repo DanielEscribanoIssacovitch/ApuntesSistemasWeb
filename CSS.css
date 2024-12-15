@@ -1,49 +1,315 @@
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-    color: #333;
+/* ===========================
+   Selección de Elementos y Clases
+============================= */
+
+/* .class-name: Selección de clases */
+.class-name {
+    color: #333; /* Selecciona todos los elementos con la clase "class-name" */
+    /* Otros elementos pueden tener múltiples clases, ej: <div class="class-name another-class"> */
 }
 
-/* Estilos de encabezados */
-h1, h2 {
-    color: #2c3e50;
-    text-align: center;
+/* #id-name: Selección por id */
+#id-name {
+    background-color: #f4f4f4; /* Selecciona el elemento con el id "id-name" */
+    /* Solo puede haber un elemento con un id único en la página */
 }
 
-/* Estilos de las secciones */
-section {
-    margin: 20px;
-    padding: 20px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Sin ningún selector (selección de elementos HTML) */
+h1 {
+    font-size: 24px; /* Selecciona todos los <h1> en la página */
+    color: darkblue; /* Cambia el color de todos los <h1> */
 }
 
-/* Estilos de listas */
-ul {
-    list-style-type: square;
-    margin-left: 40px;
+p {
+    margin: 10px; /* Selecciona todos los elementos <p> */
+    font-family: 'Arial', sans-serif; /* Cambia la tipografía de todos los <p> */
 }
 
-/* Estilos para código y ejemplos */
-pre {
-    background-color: #e8f0fe;
-    padding: 10px;
-    border-radius: 5px;
-    overflow-x: auto;
-    font-family: 'Courier New', Courier, monospace;
-    color: #2c3e50;
+/* ===========================
+   Uso de los selectores combinados
+============================= */
+
+/* .class-name #id-name: Selección de un id dentro de una clase */
+.class-name #id-name {
+    color: red; /* Selecciona el #id-name solo si está dentro de .class-name */
+    /* Esto se aplica solo a elementos con #id-name dentro de .class-name */
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #2c3e50;
-    color: #ffffff;
+/* h1 .class-name: Selección de un elemento con clase dentro de un <h1> */
+h1 .class-name {
+    color: green; /* Selecciona todos los elementos con la clase .class-name dentro de un <h1> */
+    /* Esto afectará solo los elementos dentro del <h1> que tengan la clase "class-name" */
+}
+
+/* .class-name, p: Selección de múltiples elementos */
+.class-name, p {
+    font-size: 18px; /* Cambia el tamaño de fuente de todos los elementos con .class-name o <p> */
+    /* Afecta a todos los elementos con la clase .class-name y a todos los elementos <p> */
+}
+
+/* .class-name p: Selección de un <p> dentro de una clase */
+.class-name p {
+    color: #333; /* Aplica el color solo a los <p> dentro de .class-name */
+}
+
+/* ===========================
+   Combinación de selectores
+============================= */
+
+/* h1, h2, h3: Selección de varios elementos */
+h1, h2, h3 {
+    font-family: 'Verdana', sans-serif; /* Aplica esta fuente a <h1>, <h2> y <h3> */
+    font-weight: bold; /* Aplica el peso de la fuente en negrita */
+}
+
+/* .class-name > p: Selección de elementos <p> que son hijos directos de .class-name */
+.class-name > p {
+    color: darkred; /* Solo selecciona los <p> que son hijos directos de .class-name */
+    /* Esto no afectará a los <p> que estén dentro de otros elementos dentro de .class-name */
+}
+
+/* .class-name + p: Selección de un <p> inmediatamente después de .class-name */
+.class-name + p {
+    margin-top: 10px; /* Aplica un margen superior solo al primer <p> inmediatamente después de .class-name */
+}
+
+/* .class-name ~ p: Selección de todos los <p> después de .class-name */
+.class-name ~ p {
+    font-style: italic; /* Aplica cursiva a todos los <p> que siguen a .class-name */
+}
+
+/* ===========================
+   Propiedades CSS comunes y su aplicación
+============================= */
+
+/* Propiedad: color */
+p {
+    color: #000; /* Cambia el color del texto a negro */
+}
+
+/* Propiedad: background-color */
+div {
+    background-color: #f0f0f0; /* Cambia el fondo del <div> */
+}
+
+/* Propiedad: margin */
+.container {
+    margin: 20px; /* Añade 20px de margen alrededor del contenedor */
+}
+
+/* Propiedad: padding */
+.container {
+    padding: 15px; /* Añade 15px de espacio dentro del contenedor */
+}
+
+/* Propiedad: border */
+div {
+    border: 1px solid #ccc; /* Añade un borde gris de 1px a los <div> */
+    /* Otros valores posibles: dashed, dotted, double */
+}
+
+/* Propiedad: font-size */
+h1 {
+    font-size: 32px; /* Establece el tamaño de la fuente en 32px */
+    /* Otros valores posibles: 1.5em, 2rem, 50% */
+}
+
+/* Propiedad: width y height */
+img {
+    width: 100%; /* Establece el ancho de la imagen al 100% de su contenedor */
+    height: auto; /* Mantiene la proporción original de la imagen */
+}
+
+/* ===========================
+   Estilos avanzados
+============================= */
+
+/* Propiedad: display */
+.container {
+    display: flex; /* Flexbox para hacer que los elementos dentro del contenedor se alineen de manera flexible */
+    /* Otros valores posibles: block, inline, grid, none (oculta el elemento) */
+}
+
+/* Propiedad: position */
+.sticky {
+    position: sticky; /* Hace que el elemento se quede pegado en la parte superior al hacer scroll */
+    top: 0; /* Se queda pegado en la parte superior */
+    /* Otros valores posibles: relative, absolute, fixed */
+}
+
+/* Propiedad: overflow */
+.box {
+    overflow: auto; /* Agrega barras de desplazamiento cuando el contenido se desborda */
+    /* Otros valores posibles: hidden, scroll, visible */
+}
+
+/* Propiedad: opacity */
+.transparent {
+    opacity: 0.5; /* Hace que el elemento sea semitransparente */
+    /* Otros valores posibles: 0 (totalmente transparente) a 1 (totalmente opaco) */
+}
+
+/* Propiedad: text-align */
+.text-center {
+    text-align: center; /* Centra el texto dentro del elemento */
+    /* Otros valores posibles: left, right, justify */
+}
+
+/* ===========================
+   Estilos Generales - Estructura
+============================= */
+
+/* Propiedad: width */
+.container {
+    width: 100%; /* El elemento ocupará todo el ancho de su contenedor padre */
+    /* Otros valores posibles: 50%, 80%, auto (por defecto) */
+}
+
+/* Propiedad: height */
+.full-height {
+    height: 100vh; /* Ocupa el 100% de la altura de la ventana del navegador */
+    /* Otros valores posibles: 100px, auto, 50%, calc(100% - 50px) */
+}
+
+/* Propiedad: margin */
+.margin-example {
+    margin: 20px; /* Margen de 20 píxeles alrededor del elemento */
+    /* Otros valores posibles: 10px, 5% (porcentaje del contenedor), auto (centrado horizontalmente) */
+}
+
+/* Propiedad: padding */
+.padding-example {
+    padding: 10px 20px; /* 10px arriba y abajo, 20px a los lados */
+    /* Otros valores posibles: 20px, 5% (porcentaje), 10px 0 15px 0 (top, right, bottom, left) */
+}
+
+/* ===========================
+   Tipografía
+============================= */
+
+/* Propiedad: font-family */
+.text-example {
+    font-family: 'Arial', sans-serif; /* Fuente principal, con una fuente secundaria en caso de que no esté disponible */
+    /* Otros valores posibles: 'Times New Roman', 'Courier New', sans-serif, serif */
+}
+
+/* Propiedad: font-size */
+.text-size-example {
+    font-size: 16px; /* Tamaño de fuente en píxeles */
+    /* Otros valores posibles: 12px, 1.5rem (relativo a la raíz), 2em (relativo al contenedor) */
+}
+
+/* Propiedad: font-weight */
+.bold-text {
+    font-weight: bold; /* Establece el texto como negrita */
+    /* Otros valores posibles: normal, bolder, lighter, 100-900 (donde 400 es normal) */
+}
+
+/* Propiedad: font-style */
+.italic-text {
+    font-style: italic; /* Texto en cursiva */
+    /* Otros valores posibles: normal, oblique */
+}
+
+/* ===========================
+   Colores
+============================= */
+
+/* Propiedad: color */
+.text-color {
+    color: #333; /* Color del texto (usando valor hexadecimal) */
+    /* Otros valores posibles: #000 (negro), rgb(255, 0, 0) (rojo), rgba(255, 0, 0, 0.5) (rojo semitransparente), red */
+}
+
+/* Propiedad: background-color */
+.bg-color {
+    background-color: #f4f4f4; /* Color de fondo (usando valor hexadecimal) */
+    /* Otros valores posibles: #fff (blanco), rgb(0, 0, 0), rgba(0, 0, 0, 0.5), lightblue */
+}
+
+/* Propiedad: border-color */
+.border-example {
+    border: 2px solid #4CAF50; /* Borde de 2px, sólido y verde */
+    /* Otros valores posibles: 1px dotted #000 (dotted), 3px dashed #ff0000 (dashed) */
+}
+
+/* ===========================
+   Estilo de Caja
+============================= */
+
+/* Propiedad: display */
+.block-example {
+    display: block; /* El elemento ocupará todo el ancho disponible y se coloca en nueva línea */
+    /* Otros valores posibles: inline, inline-block, flex, grid, none */
+}
+
+/* Propiedad: position */
+.position-example {
+    position: absolute; /* Posición absoluta respecto a su primer contenedor posicionado */
+    top: 10px;
+    left: 20px;
+    /* Otros valores posibles: relative, fixed, sticky, absolute, static (por defecto) */
+}
+
+/* Propiedad: z-index */
+.z-index-example {
+    z-index: 10; /* Controla la superposición de los elementos. Los elementos con valores más altos estarán por encima de los más bajos */
+    /* Otros valores posibles: números enteros, cuanto mayor sea el número, más encima estará */
+}
+
+/* Propiedad: float */
+.float-example {
+    float: left; /* Hace que el elemento flote a la izquierda */
+    /* Otros valores posibles: right (derecha), none (por defecto) */
+}
+
+/* ===========================
+   Estilo de Flexbox
+============================= */
+
+/* Propiedad: display: flex */
+.flex-container {
+    display: flex; /* Convierte el contenedor en un contenedor flexbox */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    gap: 20px; /* Espaciado entre los elementos */
+    /* Otros valores de justify-content: flex-start, flex-end, space-between, space-around, space-evenly */
+    /* Otros valores de align-items: flex-start, flex-end, stretch, baseline */
+}
+
+/* ===========================
+   Estilo de Grid
+============================= */
+
+/* Propiedad: display: grid */
+.grid-container {
+    display: grid; /* Convierte el contenedor en un contenedor grid */
+    grid-template-columns: 1fr 1fr 1fr; /* Crea 3 columnas de igual tamaño */
+    gap: 15px; /* Espaciado entre los elementos */
+    /* Otros valores posibles para grid-template-columns: 100px 1fr auto, repeat(3, 1fr), etc. */
+}
+
+/* Propiedad: grid-template-rows */
+.grid-rows-example {
+    grid-template-rows: 100px auto 50px; /* Define 3 filas con tamaños específicos */
+    /* Otros valores posibles: auto, minmax(100px, 1fr) */
+}
+
+/* ===========================
+   Estilos de Responsividad
+============================= */
+
+/* Media queries para ajustar el diseño en pantallas pequeñas */
+@media (max-width: 768px) {
+    .responsive-example {
+        font-size: 14px; /* Ajusta el tamaño de fuente en pantallas pequeñas */
+        padding: 5px; /* Reduce el padding en pantallas pequeñas */
+    }
+}
+
+/* Media query para pantallas de escritorio grandes */
+@media (min-width: 1024px) {
+    .responsive-large-screen {
+        font-size: 18px; /* Ajusta el tamaño de fuente para pantallas grandes */
+    }
 }
