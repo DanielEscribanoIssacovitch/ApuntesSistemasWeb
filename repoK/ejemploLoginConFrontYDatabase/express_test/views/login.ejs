@@ -1,0 +1,18 @@
+<%- include("header", {}) %>
+<h1><%= title %></h1>
+<p>Welcome to Login mmg  </p>
+
+<div class="login-container">
+    <form class="login-form" method="post">
+        <h2>Log in</h2>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="pass" id="password" required>
+        </div>
+        <button type="submit" class="login-button">Log in</button>
+    </form>
+</div>

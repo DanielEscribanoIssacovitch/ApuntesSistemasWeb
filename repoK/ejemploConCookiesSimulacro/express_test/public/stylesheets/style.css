@@ -1,0 +1,81 @@
+
+* {
+  margin: 0;/*Elimina todos los márgenes predeterminados */
+  padding: 0; /* Elimina todo el relleno predeterminado */ 
+  box-sizing: border-box; /* ancho y alto incluyan el contenido, el relleno y los bordes. */
+}
+
+
+body {
+  padding:0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav {
+  background-color: blueviolet;
+  height: 100px;
+  width: 100%; /* Ocupa todo el ancho de la pantalla */
+
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  
+
+}
+
+li {
+  margin-left: 20px;
+}
+
+.cookies {
+  margin-top: 30% ;
+  background-color: gray;
+  height: 200px;
+  overflow: hidden;
+  
+}
+
+
+
+div p {
+
+  text-align: center;
+ 
+
+}
+
+div h1 {
+  text-align: center;
+  padding-top: 20px;
+ 
+
+}
+
+.boton {
+  
+  display: inline-flex;
+  gap: 20px;
+  color: #fff;
+  float: left;
+  background: white;
+  cursor: pointer;
+  color: black;
+  width: 80px;
+
+    
+}
+.botones {
+  margin-top: 20px;
+  display: flex; /* Flexbox para los botones */
+  justify-content: center; /* Centra los botones horizontalmente */
+  gap: 40px; /* Espaciado entre los botones */
+}

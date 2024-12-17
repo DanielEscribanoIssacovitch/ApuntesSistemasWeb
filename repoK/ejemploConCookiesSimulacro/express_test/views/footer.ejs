@@ -1,0 +1,31 @@
+<% if (!cookiesAccepted) { %>
+<div class="cookies" id="cookies" >
+    <h1> Uso de cookies</h1> <br>
+    <p> Nos vemos obligados a informarte del uso de cookies necesarias para que funcione esta aplicacion web</p>
+    <div class="botones">
+    <button class="boton" id = "aceptar"> Aceptar</button>
+    <button class="boton" id="cancelar"> Rechazar</button>
+    </div>
+</div>
+<% } %>
+<script>
+    document.getElementById("cancelar").addEventListener("click", function () {
+      window.location.href = "https://www.google.es"; 
+    });
+
+    document.getElementById("aceptar").addEventListener("click", function () {
+        document.getElementById("cookies").hidden=true;
+
+        fetch("/cookies/aceptar", { method: "POST" })
+        .then(response => {
+            if (response.ok) {
+                console.log("Cookies aceptadas.");
+            } else {
+                console.error("Error al aceptar las cookies.");
+            }
+        });
+    });
+  </script>
+
+</body>
+</html>

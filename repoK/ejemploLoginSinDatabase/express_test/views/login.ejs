@@ -1,0 +1,161 @@
+<%- include("header", {}) %>
+<h1><%= title %></h1>
+<p>Welcome to Login</p>
+<form method="post">
+<!-- el atributo de name define la claves de los datos, si tuviese name = fname:
+ en el request.body se envia 
+ {
+  "fname": "el_valor_introducido_en_el_campo",
+  "password": "el_valor_introducido_en_el_campo"
+}
+y, en login.js   
+let user = req.body.fname; // Intenta obtener el valor de un campo llamado "user"
+let password = req.body.password; // Obtiene el valor del campo "password"
+
+
+pero en este caso, tenho que el atributo name tiene el valor user, por tnato, al servidor se le envia 
+
+{
+  "user": "el_valor_introducido_en_el_campo",
+  "password": "el_valor_introducido_en_el_campo"
+}
+
+y en el login.js, tendría algo como:
+
+let user = req.body.user; // Intenta obtener el valor de un campo llamado "user"
+let password = req.body.password; // Obtiene el valor del campo "password"
+
+req.body coge los datos del cuerpo de la solicyuid http, es dexir, los valores introducidos en el formulario
+
+
+========================================
+que pasa si en el formulario no tienes los atributos name 
+Si no usas JavaScript y tus campos no tienen el atributo name, 
+el servidor no recibirá ningún dato porque HTML estándar solo envía los valores de campos con el atributo name.
+
+<form method="post">
+    <input type="text" id="username">
+    <input type="password" class="password-field">
+    <input type="submit" value="Submit">
+</form>
+
+
+req.body estará vacío: {}
+
+
+además, tendría que enviar manuelmente los datos al servidor,
+
+document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Capturar valores directamente con id
+    const username = document.getElementById('username').value;
+    const password = document.querySelector('.password-field').value;
+
+    // Construir el objeto con los datos
+    const data = { username, password };
+
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => console.log('Respuesta del servidor:', data))
+    .catch(error => console.error('Error:', error));
+});
+
+==========================
+si solo usas id
+
+
+
+
+
+
+<form id="myForm">
+    <label>Username: <input type="text" id="username"></label><br>
+    <label>Password: <input type="password" id="password"></label><br>
+    <input type="submit" value="Login">
+</form>
+
+
+
+
+
+
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Evitar el envío estándar del formulario
+
+        // Capturar los valores de los inputs usando "id"
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Enviar los datos al servidor manualmente
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }), // Enviar los datos como JSON
+        })
+        .then(response => response.json())
+        .then(data => console.log('Respuesta del servidor:', data))
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+
+==========================
+si usas class y id, en este caso, nos quedamos con el id
+
+<form id="myForm">
+    <label>Username: <input type="text" class="input-field" id="username"></label><br>
+    <label>Password: <input type="password" class="input-field" id="password"></label><br>
+    <input type="submit" value="Login">
+</form>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Capturar los valores de los inputs usando "class"
+        const inputs = document.querySelectorAll('.input-field');
+        const data = {};
+
+        inputs.forEach(input => {
+            data[input.id] = input.value; // Usa "id" como clave y su valor
+        });
+
+        // Enviar los datos al servidor
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => console.log('Respuesta del servidor:', data))
+        .catch(error => console.error('Error:', error));
+    });
+
+
+
+</script>
+
+
+en el caso anterior, si te quisieras quedar con class, cambiar el for
+inputs.forEach(input => {
+    data[input.className] = input.value; // Usa "class" como clave
+});
+
+-->
+    <label>First name: <input type="text" name="user"></label><br>
+    <label>Password: <input type="password" name="password"></label><br>
+
+    <input type="submit" value="Submit">
+</form>

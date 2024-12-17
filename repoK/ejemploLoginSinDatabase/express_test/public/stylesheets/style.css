@@ -1,0 +1,35 @@
+/* Aplica un fondo gris al navbar */
+nav {
+  background-color: red; /* Fondo gris claro */
+   padding: 10px;  /*relleno nav, grosor barra elementos */
+}
+
+/* Estilo para la lista del navbar */
+ul {
+  list-style-type: none; /* Quita los puntos de la lista */
+  margin: 0; /* Quita márgenes */
+  padding: 0; /* Quita relleno */
+  display: flex; /* Coloca los elementos en una fila */
+   /* Espaciar elementos */
+  align-items: center; /* Centrar elementos verticalmente */
+}
+
+/* Estilo para los elementos de la lista */
+li {
+  margin-right: 20px; /* Espaciado entre los enlaces */
+}
+
+/* Estilo para los enlaces */
+a {
+  color: black; /* Color del texto */
+  text-decoration: none; /* Sin subrayado */
+  font-weight: bold; /* Texto en negrita */
+}
+
+/* Efecto hover en los enlaces */
+a:hover {
+  color: blue; /* Cambia el color al pasar el ratón */
+  background-color: #e0e0e0; /* Fondo gris más oscuro */
+  padding: 5px; /* Añade relleno en hover para resaltado */
+  border-radius: 4px; /* Bordes redondeados */
+}

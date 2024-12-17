@@ -1,0 +1,110 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: black;
+  font-size: 28px; /* aumentar tamaño de la letra*/
+  font-weight: bold; /* Negrita */
+  text-decoration: none; /* Quita el subrayado */
+}
+
+nav {
+  background-color: green;
+  padding: 20px;
+  height: 70px; /* Altura fija del navbar, para qud uendo aumntes el tamaño de letra, este no aumente */
+}
+
+ul {
+  list-style-type: none;
+  display: flex; /* poner rutas en fila*/
+}
+li {
+  margin-right: 20px;
+
+
+}
+
+a:hover {
+  border-radius: 10px
+}
+
+input {
+  background-color: aquamarine;
+
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  background-color: gray;
+  padding: 20px;
+  border: 5px solid black;
+}
+
+.card {
+  flex: 1; /** los tres div tienen el mismo tamaño, no va por parrafo*/ 
+  margin: 20px; /** distancia entre cards */
+  padding: 20px; /*  grosor de la caja blanca*/ 
+  background-color: #eee;
+  border-radius: 5px; /**  borde secciones blancas mas suave ne vez de cuadrado, esquinas del div*/
+  
+}
+
+.login-container {
+  display: flex;
+  width: 30%;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+  border: 3px solid black;
+  width: 300px;
+  position: fixed;/** Asegura que el contenedor se posicione en relación con la ventana del navegador*/
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
+
+/* Encabezado del formulario */
+.login-form h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block; /** poner labels arriba de la caja */ 
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  background-color: aquamarine; /* Color aquamarino */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+}
+
+

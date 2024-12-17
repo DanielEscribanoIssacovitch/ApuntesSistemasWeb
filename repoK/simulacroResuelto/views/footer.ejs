@@ -1,0 +1,36 @@
+<div class="cookies" id="cookie_div">
+    <br>
+    <h1 class="titulo_cookies"> Uso de cookies</h1>
+    
+    
+    <p class = "parrafo_cookies"> Nos vemos obligados a informarte del uso de cookies necesarias para que funcione esta aplicacion web</p>
+    <div class="botones">
+    <button class="boton" id="aceptar"> Aceptar</button>
+    <button class="boton" id ="rechazar"> Rechazar</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById("rechazar").addEventListener("click", function(){
+        window.location.href = 'https://www.google.com';
+    })
+
+    document.getElementById("aceptar").addEventListener("click", function(){
+        document.getElementById("cookie_div").hidden=true;
+        
+    fetch('/cookies',{
+        method: 'POST'
+    })
+    .then(response =>{
+        if(response.ok){
+            console.log("Cookies Aceptadas")
+        }else{
+            console.log("Error")
+        }
+        
+    });  
+    });
+</script>
+
+</body>
+</html>
