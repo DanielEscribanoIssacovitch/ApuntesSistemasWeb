@@ -1,0 +1,163 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('express-test:server');
+var http = require('http');
+const { Server } = require("socket.io");
+
+const fs = require('fs');
+
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3100');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+const io = new Server(server);
+const messagesFile = './messages.json';
+let messages = []; // Array para almacenar el historial de mensajes
+
+
+/**
+ * Cargar los mensajes desde el archivo JSON una vez al iniciar el servidor
+ */
+if (fs.existsSync(messagesFile)) {
+  try {
+      const data = fs.readFileSync(messagesFile, 'utf-8');
+      messages = JSON.parse(data); // Cargar mensajes persistentes
+      console.log('Mensajes cargados correctamente:', messages);
+  } catch (error) {
+      console.error('Error al leer el archivo de mensajes:', error);
+  }
+} else {
+  console.log('El archivo de mensajes no existe, creando uno nuevo...');
+  fs.writeFileSync(messagesFile, JSON.stringify([]));
+}
+
+/**
+ * Guardar los mensajes en el archivo JSON
+ */
+function saveMessages() {
+  try {
+      fs.writeFileSync(messagesFile, JSON.stringify(messages, null, 2));
+  } catch (error) {
+      console.error('Error al guardar mensajes:', error);
+  }
+}
+
+
+io.on('connection', (socket) => {
+  console.log('Un usuario se ha conectado');
+
+
+
+  // Enviar historial de mensajes al usuario conectado
+  console.log('Enviando historial de mensajes:', messages);
+  socket.emit('chatHistory', messages);
+
+
+
+
+  socket.on('joinRoom', ({ sender, receiver }) => {
+    const roomName = [sender, receiver].sort().join('_'); // Nombre único para la sala
+    socket.join(roomName);
+    console.log(`${sender} se unió a la sala: ${roomName}`);
+});
+
+// Evento para enviar mensajes privados
+socket.on('privateMessage', ({ sender, receiver, message }) => {
+    const roomName = [sender, receiver].sort().join('_');
+    io.to(roomName).emit('privateMessage', { username: sender, message: message });
+    console.log(`Mensaje privado en sala ${roomName}: ${message}`);
+});
+  
+  // Manejar eventos de mensajes
+  socket.on('chatMessage', (data) => {
+      messages.push(data); 
+      saveMessages();
+      io.emit('chatMessage', data); // Enviar el mensaje a todos los clientes
+  });
+
+  socket.on('disconnect', () => {
+      console.log('Un usuario se ha desconectado');
+  });
+});
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

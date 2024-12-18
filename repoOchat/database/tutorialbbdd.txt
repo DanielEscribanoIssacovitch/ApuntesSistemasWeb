@@ -1,0 +1,192 @@
+1. Registro de un Usuario
+Para registrar un nuevo usuario, se utiliza la función users.register. Esta genera un hash de la contraseña y almacena los datos del usuario.
+
+Uso:
+javascript
+Copiar código
+const users = require('./ruta_al_archivo');
+
+// Registra un usuario
+try {
+    users.register('usuario1', 'contraseña123');
+    console.log('Usuario registrado con éxito.');
+} catch (error) {
+    console.error(error.message);
+}
+Si el usuario ya existe, lanza un error.
+2. Validar Inicio de Sesión
+Para verificar si las credenciales de un usuario son correctas, se usa users.isLoginRight. Esta función compara la contraseña proporcionada con el hash almacenado.
+
+Uso:
+javascript
+Copiar código
+(async () => {
+    const loginCorrecto = await users.isLoginRight('usuario1', 'contraseña123');
+    if (loginCorrecto) {
+        console.log('Inicio de sesión exitoso.');
+    } else {
+        console.log('Credenciales incorrectas.');
+    }
+})();
+3. Gestión de Cookies
+Puedes habilitar o deshabilitar cookies para un usuario con savecookies y deletecookies.
+
+Uso:
+javascript
+Copiar código
+// Activar cookies para un usuario
+users.savecookies('usuario1');
+console.log('Cookies habilitadas:', users.data['usuario1'].cookies);
+
+// Desactivar cookies para un usuario
+users.deletecookies('usuario1');
+console.log('Cookies deshabilitadas:', users.data['usuario1'].cookies);
+4. Generar y Comparar Contraseñas Manualmente
+Si deseas generar manualmente un hash, utiliza users.generateHash.
+Para verificar si una contraseña coincide con un hash, usa users.comparePass.
+Uso:
+javascript
+Copiar código
+const bcrypt = require('bcrypt');
+
+// Generar hash de una contraseña
+users.generateHash('miContraseña', (err, hash) => {
+    if (err) {
+        console.error('Error generando el hash:', err);
+        return;
+    }
+    console.log('Hash generado:', hash);
+
+    // Comparar contraseña con el hash generado
+    (async () => {
+        const esValida = await users.comparePass('miContraseña', hash);
+        console.log('¿La contraseña es válida?', esValida);
+    })();
+});
+5. Inspeccionar los Datos de los Usuarios
+Puedes ver los datos almacenados en la "base de datos" accediendo directamente a users.data.
+
+Uso:
+javascript
+Copiar código
+console.log('Usuarios registrados:', users.data);
+Notas Importantes:
+Asincronía en las contraseñas: Asegúrate de manejar correctamente las funciones asíncronas para no bloquear el flujo de la aplicación.
+Persistencia: Esta implementación no persiste datos en disco. Al reiniciar el programa, los datos se perderán. Para persistencia real, deberías guardar users.data en un archivo o en una base de datos real (e.g., MongoDB, MySQL).
+Seguridad: Nunca almacenes contraseñas sin hash y evita mostrar directamente hashes u otra información sensible.
+¡Eso es todo! Este sistema es sencillo, pero te proporciona una buena base para entender la autenticación y el manejo de datos básicos de usuarios.
+
+Estructura del Chat
+Creamos un objeto chat que tendrá:
+
+Una lista de salas (rooms), donde cada sala contiene mensajes.
+Funciones para agregar salas, enviar mensajes y obtener mensajes por sala.
+javascript
+Copiar código
+const chat = {};
+
+// Almacén de salas de chat y sus mensajes
+chat.rooms = {};
+
+// Crear una sala de chat
+chat.createRoom = function(roomName) {
+    if (this.rooms.hasOwnProperty(roomName)) {
+        throw new Error(`La sala "${roomName}" ya existe.`);
+    }
+    this.rooms[roomName] = []; // Cada sala contiene un array de mensajes
+};
+
+// Enviar un mensaje a una sala
+chat.sendMessage = function(roomName, username, message) {
+    if (!this.rooms.hasOwnProperty(roomName)) {
+        throw new Error(`La sala "${roomName}" no existe.`);
+    }
+    const timestamp = new Date().toISOString();
+    this.rooms[roomName].push({ username, message, timestamp });
+};
+
+// Obtener mensajes de una sala
+chat.getMessages = function(roomName) {
+    if (!this.rooms.hasOwnProperty(roomName)) {
+        throw new Error(`La sala "${roomName}" no existe.`);
+    }
+    return this.rooms[roomName];
+};
+
+// Obtener todas las salas
+chat.getRooms = function() {
+    return Object.keys(this.rooms);
+};
+
+module.exports = chat;
+Cómo Usarlo
+1. Crear una Sala de Chat
+Para crear una nueva sala, usa createRoom:
+
+javascript
+Copiar código
+const chat = require('./ruta_al_archivo');
+
+// Crear una nueva sala de chat
+try {
+    chat.createRoom('general');
+    console.log('Sala creada: general');
+} catch (error) {
+    console.error(error.message);
+}
+2. Enviar Mensajes a la Sala
+Para enviar un mensaje a una sala específica, usa sendMessage:
+
+javascript
+Copiar código
+// Enviar un mensaje
+try {
+    chat.sendMessage('general', 'usuario1', '¡Hola, este es mi primer mensaje!');
+    console.log('Mensaje enviado.');
+} catch (error) {
+    console.error(error.message);
+}
+3. Obtener Mensajes de una Sala
+Puedes listar los mensajes de una sala con getMessages:
+
+javascript
+Copiar código
+// Obtener los mensajes de la sala "general"
+try {
+    const mensajes = chat.getMessages('general');
+    console.log('Mensajes en la sala "general":', mensajes);
+} catch (error) {
+    console.error(error.message);
+}
+4. Ver Todas las Salas
+Para obtener la lista de todas las salas disponibles, usa getRooms:
+
+javascript
+Copiar código
+const salas = chat.getRooms();
+console.log('Salas disponibles:', salas);
+Ejemplo Completo
+Aquí tienes un ejemplo completo de cómo interactuar con este sistema de chat:
+
+javascript
+Copiar código
+const chat = require('./ruta_al_archivo');
+
+try {
+    // Crear salas
+    chat.createRoom('general');
+    chat.createRoom('soporte');
+
+    // Enviar mensajes
+    chat.sendMessage('general', 'usuario1', '¡Hola a todos!');
+    chat.sendMessage('general', 'usuario2', '¡Hola usuario1!');
+    chat.sendMessage('soporte', 'usuario3', 'Necesito ayuda.');
+
+    // Listar mensajes
+    console.log('Mensajes en general:', chat.getMessages('general'));
+    console.log('Mensajes en soporte:', chat.getMessages('soporte'));
+
+    // Listar salas
+    console.log('Salas de chat:', chat.getRooms());
+} catch (error) {
+    console.error(error.message);

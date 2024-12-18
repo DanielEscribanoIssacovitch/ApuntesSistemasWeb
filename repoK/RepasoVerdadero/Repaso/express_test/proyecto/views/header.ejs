@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+        <script src="/javascripts/script.js" defer></script>
+        <nav>
+            <ul>
+                <li> <a href="/"> HOME</a> </li>
+                
+                <% if (user) {%>
+                <li><a href="/restricted"> restricted</a></li>
+                <li> <a href="/admin"> admin</a></li>
+                <li> <a href="/chat"> chat</a></li>
+                <li>  <a href="/logout"> Logout</a> </li>
+                
+                <% } else { %>
+                    <li> <a href="/Login"> Login</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    

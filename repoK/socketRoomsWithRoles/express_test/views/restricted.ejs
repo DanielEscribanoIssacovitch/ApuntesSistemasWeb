@@ -1,0 +1,18 @@
+<%- include("header", {}) %>
+
+<h1>Welcome to <%=title %>, <%= user %></h1>
+
+
+
+    <%if(usuarios[user].role === 'admin'){ %> 
+<button id="createPublicRoom">Crear Sala Pública</button>
+<button id="createPrivateRoom">Crear Sala Privada</button>
+    <% } %>
+
+<button id="joinRoom">Unirse a Sala</button>
+
+<ul id="messages"></ul>
+<form id="formChat" action="">
+    <input id="inputChat" autocomplete="off" /><button>Enviar</button>
+</form>
+<%- include("footer", {}) %>

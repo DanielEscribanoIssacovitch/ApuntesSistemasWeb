@@ -1,0 +1,14 @@
+<%- include("header", {}) %>
+
+<h1>Chat Básico con Persistencia</h1>
+<ul id="messages"></ul>
+<form id="formChat" action="">
+    <input id="inputChat" autocomplete="off" placeholder="Escribe tu mensaje..." />
+    <button>Enviar</button>
+</form>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/chat.js" defer></script>
+
+
+<%- include("footer", {}) %>

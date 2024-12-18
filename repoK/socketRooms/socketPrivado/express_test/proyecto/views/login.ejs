@@ -1,0 +1,11 @@
+<%- include("header", {}) %>
+
+<form method="POST" action="/login">
+
+    <label>Nombre</label> <input type="text" name="name"> 
+    <label>Contraseña</label> <input type="password" name="pass">
+    <input type="submit" value="login">
+
+</form>
+
+<%- include("footer", {}) %>

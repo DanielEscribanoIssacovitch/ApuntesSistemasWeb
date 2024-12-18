@@ -1,0 +1,124 @@
+* {
+  margin: 0;/*Elimina todos los márgenes predeterminados */
+  padding: 0; /* Elimina todo el relleno predeterminado */
+  box-sizing: border-box; /* ancho y alto incluyan el contenido, el relleno y los bordes. */
+} 
+
+body {
+  padding: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+nav {
+  padding: 20px;
+  height: 70px; 
+  background-color: blueviolet;
+  
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+}
+
+li {
+  margin-right: 20px;
+}
+
+
+.login-container {
+  display: flex;
+  width: 30%;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+  border: 3px solid black;
+  width: 300px;
+  position: fixed;/** Asegura que el contenedor se posicione en relación con la ventana del navegador*/
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block; /** poner labels arriba de la caja */ 
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.form-group input {
+  /*width: 100%; */
+  padding: 10px; 
+  background-color: aquamarine; /* Color aquamarino */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box; 
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  background-color: gray;
+  padding: 20px;
+  border: 5px solid black;
+}
+
+.card {
+  flex: 1; /** los tres div tienen el mismo tamaño, no va por parrafo*/ 
+  margin: 20px;  /**distancia entre cards */
+  padding: 20px; /*  grosor de la caja blanca*/ 
+  background-color: #eee;
+  border-radius: 5px; /**  borde secciones blancas mas suave ne vez de cuadrado, esquinas del div*/
+  
+}
+
+.cookies {
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  background-color: grey;
+  left: 0;/* se pegue al margen de la izquierda*/
+  width: 100%;
+  margin:  0 auto;
+  align-items: center;
+  height: 300px;
+}
+
+.cookies h1{
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.cookies p {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.botones  {
+  display: flex; 
+  justify-content: center; 
+  gap: 30px;
+}

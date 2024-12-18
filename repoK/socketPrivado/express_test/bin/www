@@ -1,0 +1,152 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('express-test:server');
+var http = require('http');
+var socketIO = require('socket.io');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3400');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+//socket
+var io = socketIO(server);
+
+
+const users = {}; // Almacenar usuarios y sus socket IDs
+
+io.on('connection', (socket) => {
+    console.log('Usuario conectado al chat.');
+
+    // Registrar usuario
+    socket.on('register user', (username) => {
+        if (username) {
+            users[username] = socket.id;
+            console.log(`Usuario registrado: ${username} (ID: ${socket.id})`);
+            console.log('Usuarios conectados:', users);
+        }
+    });
+
+    // Manejar mensajes privados
+    socket.on('chat private', ({ to, username, message }) => {
+        const recipientSocketId = users[to];
+        const timestamp = new Date().toLocaleTimeString();
+
+        if (recipientSocketId) {
+            // Enviar el mensaje privado al destinatario
+            socket.to(recipientSocketId).emit('chat private', {
+                username: username,
+                message: message,
+                time: timestamp
+            });
+
+            // Confirmar al remitente que el mensaje fue enviado
+            socket.emit('chat private', {
+                username: 'Sistema',
+                message: `Mensaje privado enviado a ${to}.`,
+                time: timestamp
+            });
+            console.log(`Mensaje privado enviado a ${to}`);
+        } else {
+            // Notificar al remitente si el destinatario no está conectado
+            socket.emit('chat private', {
+                username: 'Sistema',
+                message: `El usuario ${to} no está conectado.`,
+                time: timestamp
+            });
+            console.log(`Usuario ${to} no está conectado.`);
+        }
+    });
+
+    // Manejar desconexión
+    socket.on('disconnect', () => {
+        for (let user in users) {
+            if (users[user] === socket.id) {
+                console.log(`Usuario desconectado: ${user}`);
+                delete users[user];
+                break;
+            }
+        }
+        console.log('Usuarios conectados después de desconexión:', users);
+    });
+});
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
