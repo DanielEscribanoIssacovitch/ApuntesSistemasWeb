@@ -5,10 +5,14 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 
+
 const indexRouter = require('./routes/index');
 const loginRouter = require('./routes/login');
 const tiendaRouter = require('./routes/tienda');
 const restrictedRouter = require('./routes/restricted');
+const chatRouter = require('./routes/chat');
+const registerRouter = require('./routes/register');
+const usersRouter = require('./routes/users');
 
 const app = express();
 // view engine setup
@@ -49,6 +53,9 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/tienda', tiendaRouter);
 app.use('/restricted', restricted, restrictedRouter);
+app.use('/chat', chatRouter);
+app.use('/register', registerRouter);
+app.use("/users", usersRouter)
 app.use('/logout', (req,res) =>{
   database.user.deletecookies(req.session.user.username);
   req.session.destroy();
