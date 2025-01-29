@@ -39,4 +39,17 @@ users.isLoginRight = async function(username, password){
     return await users.comparePass(password, users.data[username].hash);
 }
 
+//Ejemplo del examen ordinario update score:
+users.updateScore = function(username, score){
+    if(users.data.hasOwnProperty(username)){
+        users.data[username].score = score;
+    } else {
+        throw new Error(`Usuario ${username} no encontrado.`);
+    }
+}
+
+users.getScores = function(){
+    return Object.values(users.data).map(user => ({ username: user.username, score: user.score }));
+}
+
 module.exports = users;

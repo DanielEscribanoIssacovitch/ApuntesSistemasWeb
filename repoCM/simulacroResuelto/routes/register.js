@@ -18,6 +18,6 @@ router.post("/", (req, res) => {
     } catch (error){
         res.status(400).send(error.message);
     }
-})
+});
 
 module.exports = router;

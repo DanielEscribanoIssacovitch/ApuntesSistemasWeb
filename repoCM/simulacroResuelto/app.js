@@ -13,6 +13,8 @@ const restrictedRouter = require('./routes/restricted');
 const chatRouter = require('./routes/chat');
 const registerRouter = require('./routes/register');
 const usersRouter = require('./routes/users');
+const scoresRouter = require('./routes/scores');
+const gameRouter = require('./routes/game');
 
 const app = express();
 // view engine setup
@@ -55,7 +57,9 @@ app.use('/tienda', tiendaRouter);
 app.use('/restricted', restricted, restrictedRouter);
 app.use('/chat', chatRouter);
 app.use('/register', registerRouter);
-app.use("/users", usersRouter)
+app.use("/users", usersRouter);
+app.use('/scores', scoresRouter);
+app.use('/game', gameRouter);
 app.use('/logout', (req,res) =>{
   database.user.deletecookies(req.session.user.username);
   req.session.destroy();

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Clics</title>
+    <%- include("header", {}) %>
+    <link rel='stylesheet' href='/stylesheets/score.css'>
+    <script src="/javascripts/score.js" defer></script>
+</head>
+<body>
+<h1>Juego de Clics</h1>
+<p>Puntos: <span id="score">0</span></p>
+<button id="clickButton">Clickea aquí</button>
+<button id="finishButton">Finalizar</button>
+<h2>Scoreboard</h2>
+<table id="scoreboard">
+    <thead>
+    <tr>
+        <th>Usuario</th>
+        <th>Puntuación</th>
+    </tr>
+    </thead>
+    <tbody id="scoreboardBody">
+    <!-- Aquí se cargarán los datos dinámicamente -->
+    </tbody>
+</table>
+</body>
+</html>
