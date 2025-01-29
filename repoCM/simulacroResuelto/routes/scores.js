@@ -2,20 +2,26 @@ const express = require('express');
 const router = express.Router();
 const database = require('../database');
 
-// Ruta para guardar la puntuación:
+// Ruta para guardar la puntuación
 router.post('/save', async (req, res) => {
     const { username, score } = req.body;
 
+    // Si el nombre de usuario no es válido o la puntuación no es un número
     if (!username || typeof score !== 'number') {
         return res.status(400).json({ error: 'Datos inválidos' });
     }
 
     try {
+        // Si el usuario no está registrado, se crea un usuario nuevo con nombre de "Invitado"
         if (!database.user.data[username]) {
-            return res.status(404).json({ error: 'Usuario no encontrado' });
+            if (username === "Invitado") {
+                database.user.data[username] = { score: 0 }; // Crear nuevo usuario 'Invitado' si no existe
+            } else {
+                return res.status(404).json({ error: 'Usuario no encontrado' });
+            }
         }
 
-        // Guardar puntuación (sobreescribiendo si ya existe)
+        // Guardar o actualizar la puntuación
         database.user.data[username].score = score;
 
         return res.json({ success: true, message: 'Puntuación guardada' });
@@ -24,7 +30,7 @@ router.post('/save', async (req, res) => {
     }
 });
 
-// Ruta para obtener los puntajes:
+// Ruta para obtener las puntuaciones
 router.get('/scores', (req, res) => {
     const scores = Object.keys(database.user.data).map(username => ({
         username,
@@ -35,3 +41,4 @@ router.get('/scores', (req, res) => {
 });
 
 module.exports = router;
+
